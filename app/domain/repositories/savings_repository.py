@@ -52,3 +52,8 @@ class ISavingsRepository(ABC):
     def get_total_all_users(self) -> Decimal:
         """Get total savings amount for all users."""
         pass
+
+    @abstractmethod
+    def get_total_expected_by_user(self, user_id: int) -> Decimal:
+        """Get total expected savings amount for a user."""
+        pass

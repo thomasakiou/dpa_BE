@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "DPA - Dynamic People Association"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
-    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,https://dynamicpeople.netlify.app"
     
     # Admin defaults
     DEFAULT_ADMIN_EMAIL: str

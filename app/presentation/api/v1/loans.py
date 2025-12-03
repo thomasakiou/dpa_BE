@@ -35,7 +35,6 @@ def get_my_loans(
 @router.post("/apply", response_model=LoanResponse, status_code=status.HTTP_201_CREATED)
 def apply_for_loan(
     request: LoanCreate,
-    user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Apply for a new loan."""
@@ -43,7 +42,7 @@ def apply_for_loan(
     handler = LoanHandler(loan_repo)
     
     command = CreateLoanCommand(
-        user_id=user_id,
+        user_id=request.user_id,
         loan_amount=request.loan_amount,
         interest_rate=request.interest_rate,
         duration_months=request.duration_months

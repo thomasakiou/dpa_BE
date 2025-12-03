@@ -7,6 +7,7 @@ from app.domain.entities.user import UserRole, UserStatus
 from app.domain.entities.savings import SavingsStatus
 from app.domain.entities.loan import LoanStatus
 from app.domain.entities.transaction import TransactionType
+from app.domain.entities.savings_payment import SavingsPaymentType
 
 
 class UserModel(Base):
@@ -26,6 +27,7 @@ class UserModel(Base):
     
     # Relationships
     savings = relationship("SavingsModel", back_populates="user", cascade="all, delete-orphan")
+    savings_payments = relationship("SavingsPaymentModel", back_populates="user", cascade="all, delete-orphan")
     shares = relationship("ShareModel", back_populates="user", cascade="all, delete-orphan")
     loans = relationship("LoanModel", back_populates="user", cascade="all, delete-orphan")
     transactions = relationship("TransactionModel", back_populates="user", cascade="all, delete-orphan")
@@ -43,11 +45,30 @@ class SavingsModel(Base):
     paid_amount = Column(Numeric(10, 2), default=0.00)
     status = Column(SQLEnum(SavingsStatus), default=SavingsStatus.PENDING, nullable=False)
     payment_date = Column(DateTime(timezone=True))
+    financial_year = Column(String(9), nullable=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     # Relationships
     user = relationship("UserModel", back_populates="savings")
+
+
+class SavingsPaymentModel(Base):
+    """SQLAlchemy model for Savings Payment entity."""
+    __tablename__ = "savings_payments"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    amount = Column(Numeric(10, 2), nullable=False)
+    type = Column(SQLEnum(SavingsPaymentType), nullable=False)
+    payment_date = Column(DateTime(timezone=True), nullable=False)
+    payment_month = Column(String(20), nullable=True)
+    financial_year = Column(String(9), nullable=True, index=True)
+    description = Column(String(500))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    # Relationships
+    user = relationship("UserModel", back_populates="savings_payments")
 
 
 class ShareModel(Base):
@@ -60,6 +81,7 @@ class ShareModel(Base):
     share_value = Column(Numeric(10, 2), nullable=False)
     total_value = Column(Numeric(10, 2), nullable=False)
     purchase_date = Column(DateTime(timezone=True), server_default=func.now())
+    financial_year = Column(String(9), nullable=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
@@ -84,6 +106,7 @@ class LoanModel(Base):
     application_date = Column(DateTime(timezone=True), server_default=func.now())
     approval_date = Column(DateTime(timezone=True))
     disbursement_date = Column(DateTime(timezone=True))
+    financial_year = Column(String(9), nullable=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
@@ -103,8 +126,21 @@ class TransactionModel(Base):
     credit = Column(Numeric(10, 2), default=0.00)
     balance = Column(Numeric(10, 2), nullable=False)
     reference_id = Column(Integer)
+    financial_year = Column(String(9), nullable=True, index=True)
     transaction_date = Column(DateTime(timezone=True), server_default=func.now())
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     # Relationships
     user = relationship("UserModel", back_populates="transactions")
+
+
+class SystemSettingsModel(Base):
+    """SQLAlchemy model for System Settings."""
+    __tablename__ = "system_settings"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    key = Column(String(100), unique=True, nullable=False, index=True)
+    value = Column(String(500), nullable=False)
+    description = Column(String(500))
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+

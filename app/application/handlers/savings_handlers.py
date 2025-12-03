@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from app.domain.repositories.savings_repository import ISavingsRepository
 from app.application.commands.savings_commands import (
     CreateSavingsCommand, RecordSavingsPaymentCommand, 
-    UpdateSavingsCommand, DeleteSavingsCommand
+    UpdateSavingsCommand, DeleteSavingsCommand, WithdrawSavingsCommand
 )
 from app.application.queries.queries import GetUserSavingsQuery, GetAllSavingsQuery
 from app.domain.entities.savings import Savings, SavingsStatus
@@ -53,6 +53,19 @@ class SavingsHandler:
             )
             
         savings.record_payment(command.amount, command.payment_date)
+        return self.savings_repository.update(savings)
+
+    def handle_withdraw_savings(self, command: WithdrawSavingsCommand) -> Savings:
+        """Handle withdraw savings command."""
+        savings = self.savings_repository.get_by_id(command.savings_id)
+        if not savings:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Savings record not found"
+            )
+            
+        # Withdraw is essentially a negative payment
+        savings.record_payment(-command.amount, command.payment_date)
         return self.savings_repository.update(savings)
     
     def handle_update_savings(self, command: UpdateSavingsCommand) -> Savings:

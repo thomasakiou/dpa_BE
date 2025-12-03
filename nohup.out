@@ -1,0 +1,112 @@
+/usr/bin/python3: No module named uvicorn
+INFO:     Started server process [3011830]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8003 (Press CTRL+C to quit)
+2025-12-02 06:37:56,480 INFO sqlalchemy.engine.Engine select pg_catalog.version()
+2025-12-02 06:37:56,481 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-02 06:37:56,482 INFO sqlalchemy.engine.Engine select current_schema()
+2025-12-02 06:37:56,483 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-02 06:37:56,483 INFO sqlalchemy.engine.Engine show standard_conforming_strings
+2025-12-02 06:37:56,484 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-02 06:37:56,484 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:37:56,491 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:37:56,492 INFO sqlalchemy.engine.Engine [generated in 0.00037s] {'email_1': 'admin@example.com', 'param_1': 1}
+2025-12-02 06:37:56,497 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.member_id = %(member_id_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:37:56,497 INFO sqlalchemy.engine.Engine [generated in 0.00033s] {'member_id_1': 'admin@example.com', 'param_1': 1}
+2025-12-02 06:37:56,500 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:45260 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+2025-12-02 06:39:53,328 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:39:53,330 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:39:53,330 INFO sqlalchemy.engine.Engine [cached since 116.8s ago] {'email_1': 'admin@dpa.com', 'param_1': 1}
+2025-12-02 06:39:53,645 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:39378 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+2025-12-02 06:39:53,655 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:39:53,657 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2025-12-02 06:39:53,657 INFO sqlalchemy.engine.Engine [generated in 0.00030s] {'param_1': 100, 'param_2': 0}
+2025-12-02 06:39:53,671 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:39380 - "GET /api/v1/admin/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39390 - "POST /api/v1/admin/users HTTP/1.1" 422 Unprocessable Entity
+2025-12-02 06:40:53,015 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,017 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:40:53,018 INFO sqlalchemy.engine.Engine [cached since 176.5s ago] {'email_1': 'admin@dpa.com', 'param_1': 1}
+2025-12-02 06:40:53,324 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:37954 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+2025-12-02 06:40:53,333 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,334 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2025-12-02 06:40:53,334 INFO sqlalchemy.engine.Engine [cached since 59.68s ago] {'param_1': 100, 'param_2': 0}
+2025-12-02 06:40:53,338 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:37966 - "GET /api/v1/admin/users HTTP/1.1" 200 OK
+2025-12-02 06:40:53,346 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,347 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:40:53,347 INFO sqlalchemy.engine.Engine [cached since 176.9s ago] {'email_1': 'testuser@example.com', 'param_1': 1}
+2025-12-02 06:40:53,349 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.member_id = %(member_id_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:40:53,349 INFO sqlalchemy.engine.Engine [cached since 176.9s ago] {'member_id_1': 'TEST001', 'param_1': 1}
+2025-12-02 06:40:53,653 INFO sqlalchemy.engine.Engine INSERT INTO users (member_id, email, hashed_password, full_name, phone, role, status, created_at, updated_at) VALUES (%(member_id)s, %(email)s, %(hashed_password)s, %(full_name)s, %(phone)s, %(role)s, %(status)s, %(created_at)s, %(updated_at)s) RETURNING users.id
+2025-12-02 06:40:53,653 INFO sqlalchemy.engine.Engine [generated in 0.00050s] {'member_id': 'TEST001', 'email': 'testuser@example.com', 'hashed_password': '$2b$12$fJoOYxZgQwYqQurevhhqz.vpiaSuwgOuyoPHwFJOAE3JUU/h1maiO', 'full_name': 'Test User', 'phone': '1234567890', 'role': 'MEMBER', 'status': 'ACTIVE', 'created_at': datetime.datetime(2025, 12, 2, 5, 40, 53, 643703), 'updated_at': datetime.datetime(2025, 12, 2, 5, 40, 53, 643713)}
+2025-12-02 06:40:53,657 INFO sqlalchemy.engine.Engine COMMIT
+2025-12-02 06:40:53,666 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,668 INFO sqlalchemy.engine.Engine SELECT users.id, users.member_id, users.email, users.hashed_password, users.full_name, users.phone, users.role, users.status, users.created_at, users.updated_at 
+FROM users 
+WHERE users.id = %(pk_1)s
+2025-12-02 06:40:53,668 INFO sqlalchemy.engine.Engine [generated in 0.00023s] {'pk_1': 3}
+2025-12-02 06:40:53,674 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:37982 - "POST /api/v1/admin/users HTTP/1.1" 201 Created
+2025-12-02 06:40:53,682 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,683 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:40:53,684 INFO sqlalchemy.engine.Engine [generated in 0.00059s] {'id_1': 3, 'param_1': 1}
+2025-12-02 06:40:53,686 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.member_id AS users_member_id, users.email AS users_email, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.phone AS users_phone, users.role AS users_role, users.status AS users_status, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-12-02 06:40:53,686 INFO sqlalchemy.engine.Engine [cached since 0.00254s ago] {'id_1': 3, 'param_1': 1}
+2025-12-02 06:40:53,688 INFO sqlalchemy.engine.Engine UPDATE users SET full_name=%(full_name)s, phone=%(phone)s, updated_at=now() WHERE users.id = %(users_id)s
+2025-12-02 06:40:53,688 INFO sqlalchemy.engine.Engine [generated in 0.00014s] {'full_name': 'Updated Test User', 'phone': '0987654321', 'users_id': 3}
+2025-12-02 06:40:53,694 INFO sqlalchemy.engine.Engine COMMIT
+2025-12-02 06:40:53,696 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-02 06:40:53,697 INFO sqlalchemy.engine.Engine SELECT users.id, users.member_id, users.email, users.hashed_password, users.full_name, users.phone, users.role, users.status, users.created_at, users.updated_at 
+FROM users 
+WHERE users.id = %(pk_1)s
+2025-12-02 06:40:53,697 INFO sqlalchemy.engine.Engine [cached since 0.02861s ago] {'pk_1': 3}
+2025-12-02 06:40:53,700 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:37992 - "PUT /api/v1/admin/users/3 HTTP/1.1" 200 OK
+INFO:     102.91.96.114:0 - "GET /docs HTTP/1.1" 404 Not Found
+INFO:     Started server process [3170684]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8003 (Press CTRL+C to quit)
+INFO:     Started server process [3170806]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 98] error while attempting to bind on address ('0.0.0.0', 8003): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3170684]

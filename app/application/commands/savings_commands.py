@@ -21,6 +21,13 @@ class RecordSavingsPaymentCommand(BaseModel):
     payment_date: Optional[datetime] = None
 
 
+class WithdrawSavingsCommand(BaseModel):
+    """Command to withdraw from savings."""
+    savings_id: int
+    amount: Decimal
+    payment_date: Optional[datetime] = None
+
+
 class UpdateSavingsCommand(BaseModel):
     """Command to update savings record."""
     savings_id: int

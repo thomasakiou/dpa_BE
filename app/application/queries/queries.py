@@ -71,3 +71,15 @@ class GetAllLoansQuery(BaseModel):
     """Query to get all loans with pagination."""
     skip: int = 0
     limit: int = 100
+
+
+class GetAllSavingsPaymentsQuery(BaseModel):
+    """Query to get all savings payments with pagination."""
+    skip: int = 0
+    limit: int = 100
+
+
+class GetSavingsPaymentByIdQuery(BaseModel):
+    """Query to get a savings payment by ID."""
+    payment_id: int
+

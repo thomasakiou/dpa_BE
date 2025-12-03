@@ -44,3 +44,13 @@ class ITransactionRepository(ABC):
     def get_all(self, skip: int = 0, limit: int = 100) -> List[Transaction]:
         """Get all transactions with pagination."""
         pass
+
+    @abstractmethod
+    def update(self, transaction: Transaction) -> Transaction:
+        """Update transaction."""
+        pass
+
+    @abstractmethod
+    def delete(self, transaction_id: int) -> bool:
+        """Delete transaction."""
+        pass

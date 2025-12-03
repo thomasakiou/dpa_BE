@@ -86,7 +86,7 @@ class LoanHandler:
                 detail="Loan not found"
             )
             
-        if loan.status != LoanStatus.ACTIVE:
+        if loan.status not in [LoanStatus.ACTIVE, LoanStatus.APPROVED]:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Cannot record repayment for loan in {loan.status} status"

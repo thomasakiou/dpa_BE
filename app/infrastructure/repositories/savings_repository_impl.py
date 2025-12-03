@@ -115,3 +115,10 @@ class SavingsRepository(ISavingsRepository):
         """Get total savings amount for all users."""
         result = self.db.query(func.sum(SavingsModel.paid_amount)).scalar()
         return Decimal(str(result)) if result else Decimal("0.00")
+
+    def get_total_expected_by_user(self, user_id: int) -> Decimal:
+        """Get total expected savings amount for a user."""
+        result = self.db.query(func.sum(SavingsModel.expected_amount)).filter(
+            SavingsModel.user_id == user_id
+        ).scalar()
+        return Decimal(str(result)) if result else Decimal("0.00")

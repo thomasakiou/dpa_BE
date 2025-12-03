@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from app.domain.repositories.user_repository import IUserRepository
 from app.application.commands.user_commands import (
     CreateUserCommand, UpdateUserCommand, SuspendUserCommand, 
-    ActivateUserCommand, DeleteUserCommand
+    ActivateUserCommand, DeleteUserCommand, ResetPasswordCommand
 )
 from app.application.queries.queries import GetUserQuery, GetUsersQuery
 from app.domain.entities.user import User, UserRole, UserStatus
@@ -103,6 +103,20 @@ class UserHandler:
     def handle_delete_user(self, command: DeleteUserCommand) -> bool:
         """Handle delete user command."""
         return self.user_repository.delete(command.user_id)
+    
+    def handle_reset_password(self, command: ResetPasswordCommand) -> User:
+        """Handle reset password command."""
+        user = self.user_repository.get_by_id(command.user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found"
+            )
+        
+        # Hash the new password and update the user
+        user.hashed_password = get_password_hash(command.new_password)
+        return self.user_repository.update(user)
+
     
     # Queries
     def handle_get_user(self, query: GetUserQuery) -> User:

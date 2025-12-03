@@ -8,9 +8,10 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="Backend API for Dynamic People Association financial system",
-    openapi_url="/dpa/api/v1/openapi.json",
-    docs_url="/dpa/docs",
-    redoc_url="/dpa/redoc",
+    root_path="/dpa",
+    openapi_url="/api/v1/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
 
 # CORS Middleware

@@ -36,3 +36,9 @@ class ActivateUserCommand(BaseModel):
 class DeleteUserCommand(BaseModel):
     """Command to delete a user."""
     user_id: int
+
+
+class ResetPasswordCommand(BaseModel):
+    """Command to reset a user's password."""
+    user_id: int
+    new_password: str

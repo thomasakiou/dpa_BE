@@ -36,3 +36,9 @@ class UserResponse(UserBase):
 
     class Config:
         from_attributes = True
+
+
+class PasswordResetResponse(BaseModel):
+    """Password reset response schema."""
+    new_password: str
+    message: str
