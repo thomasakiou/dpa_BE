@@ -1,5 +1,5 @@
 """Savings payment handlers."""
-from typing import List
+from typing import List, Optional
 from fastapi import HTTPException, status
 from app.domain.repositories.savings_payment_repository import ISavingsPaymentRepository
 from app.application.commands.savings_payment_commands import (
@@ -73,8 +73,8 @@ class SavingsPaymentHandler:
             )
         return payment
 
-    def handle_get_user_payments(self, user_id: int, skip: int = 0, limit: int = 100) -> List[SavingsPayment]:
-        """Handle get savings payments for a specific user."""
+    def handle_get_user_payments(self, user_id: int, skip: int = 0, limit: Optional[int] = None) -> List[SavingsPayment]:
+        """Handle get savings payments for a specific user. No limit by default."""
         return self.repository.get_by_user(user_id, skip, limit)
 
     def handle_get_total_paid_by_user(self, user_id: int) -> float:

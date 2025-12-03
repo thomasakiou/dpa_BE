@@ -12,7 +12,7 @@ class GetUserQuery(BaseModel):
 class GetUsersQuery(BaseModel):
     """Query to get all users with pagination."""
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetUserDashboardQuery(BaseModel):
@@ -24,21 +24,21 @@ class GetUserSavingsQuery(BaseModel):
     """Query to get user savings."""
     user_id: int
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetUserSharesQuery(BaseModel):
     """Query to get user shares."""
     user_id: int
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetUserLoansQuery(BaseModel):
     """Query to get user loans."""
     user_id: int
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetUserStatementQuery(BaseModel):
@@ -47,7 +47,7 @@ class GetUserStatementQuery(BaseModel):
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetAdminDashboardQuery(BaseModel):
@@ -58,25 +58,25 @@ class GetAdminDashboardQuery(BaseModel):
 class GetAllSavingsQuery(BaseModel):
     """Query to get all savings with pagination."""
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetAllSharesQuery(BaseModel):
     """Query to get all shares with pagination."""
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetAllLoansQuery(BaseModel):
     """Query to get all loans with pagination."""
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetAllSavingsPaymentsQuery(BaseModel):
     """Query to get all savings payments with pagination."""
     skip: int = 0
-    limit: int = 100
+    limit: Optional[int] = None
 
 
 class GetSavingsPaymentByIdQuery(BaseModel):

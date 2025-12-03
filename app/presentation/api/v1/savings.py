@@ -1,5 +1,5 @@
 """Savings API routes."""
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.dependencies import get_db, get_current_user_id
@@ -17,16 +17,14 @@ router = APIRouter()
 
 @router.get("/me", response_model=List[SavingsPaymentResponse])
 def get_my_savings(
-    skip: int = 0,
-    limit: int = 100,
     user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
-    """Get current user's savings history (payments)."""
+    """Get current user's savings history (payments). Returns all records without pagination."""
     payment_repo = SavingsPaymentRepository(db)
     handler = SavingsPaymentHandler(payment_repo)
     
-    return handler.handle_get_user_payments(user_id=user_id, skip=skip, limit=limit)
+    return handler.handle_get_user_payments(user_id=user_id, skip=0, limit=None)
 
 
 @router.get("/me/summary")

@@ -1,7 +1,7 @@
 """Admin API routes."""
 import secrets
 import string
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from app.core.dependencies import get_db, require_admin
@@ -41,15 +41,13 @@ def get_admin_dashboard(db: Session = Depends(get_db)):
 
 @router.get("/users", response_model=List[UserResponse], dependencies=[Depends(require_admin)])
 def get_all_users(
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    """Get all users (admin only)."""
+    """Get all users (admin only). Returns all records without pagination."""
     user_repo = UserRepository(db)
     handler = UserHandler(user_repo)
     
-    query = GetUsersQuery(skip=skip, limit=limit)
+    query = GetUsersQuery(skip=0, limit=None)
     return handler.handle_get_users(query)
 
 
@@ -146,15 +144,13 @@ def reset_user_password(
 
 @router.get("/loans", response_model=List[LoanResponse], dependencies=[Depends(require_admin)])
 def get_all_loans(
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    """Get all loans (admin only)."""
+    """Get all loans (admin only). Returns all records without pagination."""
     loan_repo = LoanRepository(db)
     handler = LoanHandler(loan_repo)
     
-    query = GetAllLoansQuery(skip=skip, limit=limit)
+    query = GetAllLoansQuery(skip=0, limit=None)
     return handler.handle_get_all_loans(query)
 
 
@@ -230,15 +226,13 @@ def record_loan_payment(
 
 @router.get("/savings", response_model=List[SavingsPaymentResponse], dependencies=[Depends(require_admin)])
 def get_all_savings_payments(
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    """Get all savings payment records (admin only)."""
+    """Get all savings payment records (admin only). Returns all records without pagination."""
     repo = SavingsPaymentRepository(db)
     handler = SavingsPaymentHandler(repo)
     
-    query = GetAllSavingsPaymentsQuery(skip=skip, limit=limit)
+    query = GetAllSavingsPaymentsQuery(skip=0, limit=None)
     return handler.handle_get_all_payments(query)
 
 
@@ -301,15 +295,13 @@ def delete_savings_payment(
 
 @router.get("/shares", response_model=List[ShareResponse], dependencies=[Depends(require_admin)])
 def get_all_shares(
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    """Get all shares (admin only)."""
+    """Get all shares (admin only). Returns all records without pagination."""
     share_repo = ShareRepository(db)
     handler = ShareHandler(share_repo)
     
-    query = GetAllSharesQuery(skip=skip, limit=limit)
+    query = GetAllSharesQuery(skip=0, limit=None)
     return handler.handle_get_all_shares(query)
 
 

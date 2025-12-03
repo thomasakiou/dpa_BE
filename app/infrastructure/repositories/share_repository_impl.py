@@ -60,9 +60,14 @@ class ShareRepository(IShareRepository):
         ).offset(skip).limit(limit).all()
         return [self._to_entity(s) for s in db_shares]
     
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[Share]:
-        """Get all shares with pagination."""
-        db_shares = self.db.query(ShareModel).offset(skip).limit(limit).all()
+    def get_all(self, skip: int = 0, limit: Optional[int] = None) -> List[Share]:
+        """Get all shares with pagination. No limit by default."""
+        query = self.db.query(ShareModel).offset(skip)
+        
+        if limit is not None:
+            query = query.limit(limit)
+        
+        db_shares = query.all()
         return [self._to_entity(s) for s in db_shares]
     
     def update(self, share: Share) -> Share:

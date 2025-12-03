@@ -65,9 +65,14 @@ class UserRepository(IUserRepository):
         db_user = self.db.query(UserModel).filter(UserModel.member_id == member_id).first()
         return self._to_entity(db_user) if db_user else None
     
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[User]:
-        """Get all users with pagination."""
-        db_users = self.db.query(UserModel).offset(skip).limit(limit).all()
+    def get_all(self, skip: int = 0, limit: Optional[int] = None) -> List[User]:
+        """Get all users with pagination. No limit by default."""
+        query = self.db.query(UserModel).offset(skip)
+        
+        if limit is not None:
+            query = query.limit(limit)
+        
+        db_users = query.all()
         return [self._to_entity(user) for user in db_users]
     
     def update(self, user: User) -> User:

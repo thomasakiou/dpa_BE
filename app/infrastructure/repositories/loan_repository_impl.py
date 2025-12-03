@@ -81,9 +81,14 @@ class LoanRepository(ILoanRepository):
         ).offset(skip).limit(limit).all()
         return [self._to_entity(loan) for loan in db_loans]
     
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[Loan]:
-        """Get all loans with pagination."""
-        db_loans = self.db.query(LoanModel).offset(skip).limit(limit).all()
+    def get_all(self, skip: int = 0, limit: Optional[int] = None) -> List[Loan]:
+        """Get all loans with pagination. No limit by default."""
+        query = self.db.query(LoanModel).offset(skip)
+        
+        if limit is not None:
+            query = query.limit(limit)
+        
+        db_loans = query.all()
         return [self._to_entity(loan) for loan in db_loans]
     
     def update(self, loan: Loan) -> Loan:

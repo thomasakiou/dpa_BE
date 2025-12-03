@@ -39,9 +39,14 @@ class SavingsPaymentRepository(ISavingsPaymentRepository):
         
         return self._to_entity(db_payment) if db_payment else None
     
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[SavingsPayment]:
-        """Get all savings payment records with pagination."""
-        db_payments = self.db.query(SavingsPaymentModel).offset(skip).limit(limit).all()
+    def get_all(self, skip: int = 0, limit: Optional[int] = None) -> List[SavingsPayment]:
+        """Get all savings payment records with pagination. No limit by default."""
+        query = self.db.query(SavingsPaymentModel).offset(skip)
+        
+        if limit is not None:
+            query = query.limit(limit)
+        
+        db_payments = query.all()
         return [self._to_entity(p) for p in db_payments]
     
     def update(self, payment: SavingsPayment) -> SavingsPayment:
@@ -92,11 +97,16 @@ class SavingsPaymentRepository(ISavingsPaymentRepository):
             created_at=model.created_at
         )
 
-    def get_by_user(self, user_id: int, skip: int = 0, limit: int = 100) -> List[SavingsPayment]:
-        """Get all savings payments for a specific user."""
-        db_payments = self.db.query(SavingsPaymentModel).filter(
+    def get_by_user(self, user_id: int, skip: int = 0, limit: Optional[int] = None) -> List[SavingsPayment]:
+        """Get all savings payments for a specific user. No limit by default."""
+        query = self.db.query(SavingsPaymentModel).filter(
             SavingsPaymentModel.user_id == user_id
-        ).offset(skip).limit(limit).all()
+        ).offset(skip)
+        
+        if limit is not None:
+            query = query.limit(limit)
+        
+        db_payments = query.all()
         return [self._to_entity(p) for p in db_payments]
 
     def get_total_paid_by_user(self, user_id: int) -> Decimal:
