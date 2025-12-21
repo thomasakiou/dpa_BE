@@ -41,8 +41,6 @@ class SavingsPayment:
     
     def _validate(self) -> None:
         """Validate the savings payment."""
-        if self.amount <= Decimal("0.00"):
-            raise ValueError("Amount must be greater than zero")
         if self.user_id <= 0:
             raise ValueError("User ID must be valid")
     
@@ -56,8 +54,6 @@ class SavingsPayment:
     ) -> None:
         """Update payment details."""
         if amount is not None:
-            if amount <= Decimal("0.00"):
-                raise ValueError("Amount must be greater than zero")
             self.amount = amount
         
         if type is not None:

@@ -106,6 +106,7 @@ class LoanModel(Base):
     application_date = Column(DateTime(timezone=True), server_default=func.now())
     approval_date = Column(DateTime(timezone=True))
     disbursement_date = Column(DateTime(timezone=True))
+    description = Column(String(500))
     financial_year = Column(String(9), nullable=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

@@ -32,6 +32,7 @@ class Loan:
         application_date: Optional[datetime] = None,
         approval_date: Optional[datetime] = None,
         disbursement_date: Optional[datetime] = None,
+        description: Optional[str] = None,
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None
     ):
@@ -48,6 +49,7 @@ class Loan:
         self.application_date = application_date or datetime.utcnow()
         self.approval_date = approval_date
         self.disbursement_date = disbursement_date
+        self.description = description
         self.created_at = created_at or datetime.utcnow()
         self.updated_at = updated_at or datetime.utcnow()
     

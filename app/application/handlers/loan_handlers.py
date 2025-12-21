@@ -31,7 +31,8 @@ class LoanHandler:
             user_id=command.user_id,
             loan_amount=command.loan_amount,
             interest_rate=command.interest_rate,
-            duration_months=command.duration_months
+            duration_months=command.duration_months,
+            description=command.description
         )
         
         # Calculate derived fields
@@ -140,6 +141,8 @@ class LoanHandler:
             loan.interest_rate = command.interest_rate
         if command.duration_months is not None:
             loan.duration_months = command.duration_months
+        if command.description is not None:
+            loan.description = command.description
             
         # Recalculate derived fields if needed
         if any([command.loan_amount, command.interest_rate, command.duration_months]):

@@ -30,6 +30,7 @@ class LoanRepository(ILoanRepository):
             application_date=model.application_date,
             approval_date=model.approval_date,
             disbursement_date=model.disbursement_date,
+            description=model.description,
             created_at=model.created_at,
             updated_at=model.updated_at
         )
@@ -50,6 +51,7 @@ class LoanRepository(ILoanRepository):
             application_date=entity.application_date,
             approval_date=entity.approval_date,
             disbursement_date=entity.disbursement_date,
+            description=entity.description,
             created_at=entity.created_at,
             updated_at=entity.updated_at
         )
@@ -107,6 +109,7 @@ class LoanRepository(ILoanRepository):
             db_loan.application_date = loan.application_date
             db_loan.approval_date = loan.approval_date
             db_loan.disbursement_date = loan.disbursement_date
+            db_loan.description = loan.description
             db_loan.updated_at = loan.updated_at
             self.db.commit()
             self.db.refresh(db_loan)

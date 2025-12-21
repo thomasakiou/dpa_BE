@@ -45,7 +45,8 @@ def apply_for_loan(
         user_id=request.user_id,
         loan_amount=request.loan_amount,
         interest_rate=request.interest_rate,
-        duration_months=request.duration_months
+        duration_months=request.duration_months,
+        description=request.description
     )
     
     return handler.handle_create_loan(command)

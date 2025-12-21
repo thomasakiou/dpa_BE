@@ -11,6 +11,7 @@ class LoanBase(BaseModel):
     loan_amount: Decimal
     interest_rate: Decimal
     duration_months: int
+    description: Optional[str] = None
 
 
 class LoanCreate(LoanBase):
@@ -23,6 +24,7 @@ class LoanUpdate(BaseModel):
     loan_amount: Optional[Decimal] = None
     interest_rate: Optional[Decimal] = None
     duration_months: Optional[int] = None
+    description: Optional[str] = None
 
 
 class LoanRepayment(BaseModel):
